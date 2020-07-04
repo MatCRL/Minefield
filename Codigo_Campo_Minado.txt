@@ -1,0 +1,291 @@
+/*
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+||*********************************************************************||
+||* 																  *||
+||*  HARDCODED BY: MATHEUS TAGLIARI BECKER + MATHEUS PASSOLD CARELLI  *||
+||* 																  *||
+||*********************************************************************||
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+*/
+
+#include <iostream> ///Entrada saída padrão///
+#include <windows.h> ///para usar as funções Sleep() e system()///
+#include <time.h> ///para usar a função time///
+#include <locale.h> ///Para usar línguas///
+#include <stdio.h> ///Para gerar números aleatórios diferentes///
+#include <stdlib.h> ///para gerar números aleatórios///
+using namespace std; ///Usar espaço comum///
+/*
+    Campo Minado com matrizes
+*/
+#define L 4 ///definir tamanho do campo de jogo///
+#define C 4 ///definir tamanho do campo de jogo///
+#define B 3 ///definir quantidade de bombas///
+int main()
+{
+	setlocale (LC_ALL, "portuguese");///escrita na tela sem erros ou bugs///
+    srand((unsigned)time(NULL) );///permite randomizar os números///
+
+    cout<<"¤¤¤¤¤¤¤¤CAMPO MINADO¤¤¤¤¤¤¤¤"<<endl;
+	cout<<" ___________________    . , ; ."<<endl;
+	cout<<"(___________________|~~~~~X.;' ."<<endl;
+	cout<<"                   ' ` ' `"<<endl;
+	Sleep(5000);///esse comando serve para pausar por x milisegundos///
+    system("cls");///esse comando serve para limpar a tela.///
+    cout<< "ENCARE ESTE DESAFIO TENSO E NÃO MORRA NO PROCESSO!"<<endl;
+	Sleep(2000);
+    system("cls");
+	cout<< "Uma aventura perigosa de raciocínio lógico e perigo \n portada diretamente para Windows!!!"<<endl;
+    Sleep(3000);
+    system("cls");
+	cout<< "FBI: Ei agente, acorda!"<<endl;
+    Sleep(2000);
+    system("cls");
+	cout<< "FBI: Acabamos de detectar uma ameaça de explosivos perto da área 51. \n Precisas desativá-las!"<<endl;
+    Sleep(3000);
+    system("cls");
+	cout<< "FBI: Mandaremos você, prepare suas coisas."<<endl;
+    Sleep(2000);
+    system("cls");
+	cout<<"                       ____________________"<<endl;
+    cout<<"                     //|           |        \""<<endl;
+	cout<<"                   //  |           |          \""<<endl;
+    cout<<"      ___________//____|___________|__________()\___________________"<<endl;
+    cout<<"     /__________________ |_=_________|_=___________|_________________{}"<<endl;
+    cout<<"     [           ______  |           | .           | ==  ______      { }"<<endl;
+    cout<<"   __[__        /##  ##\ |           |             |    /##  ##\    _{# }_"<<endl;
+    cout<<"  {_____)______|##    ##||___________|_____________|___|##    ##|__(______}"<<endl;
+    cout<<"                 ##__##                                  ##__##         "<<endl;
+    cout<<"   ----------------------------------------------------------------------------"<<endl;
+	Sleep(5000);
+    system("cls");
+	cout<<"FBI: Muito bem agente, desarme esta bomba!"<<endl<<endl;
+	Sleep(1000);
+	cout<<"	  _______"<<endl;
+	cout<<"	 /  /  / ''.."<<endl;
+	cout<<"	|~||~||~|     '."<<endl;
+	cout<<"	| || || |      : (~)T(~)"<<endl;
+	cout<<"	| || || |      '. (   ) "<<endl;
+	cout<<"	=========        (  ._ )"<<endl;
+	cout<<"	| || || |         ( | )"<<endl;
+	cout<<"	| || || |         |^^^|"<<endl;
+	cout<<"	|_||_||_|"<<endl;
+	Sleep(3000);
+    system("cls");
+
+
+    int mapa[L][C];
+    unsigned short int px=0,py=0,cont=0; ///px e py para determinar a localização das bombas,variável cont  para contador///
+    unsigned short int fiox=-1,fioy=-1;///fiox e fioy para determinar cordenadas do usuário///
+    unsigned char eu; ///entrada do usuário///
+	unsigned short int clicont= 0;///contador de quantas jogadas foram realizadas///
+
+
+    /// alocar valores dentro da matriz para facilitar a programação dos números///
+    for(unsigned short int matrizL=0;matrizL<L;matrizL++){
+        for(unsigned short int matrizC=0;matrizC<C;matrizC++){
+           mapa[matrizL][matrizC]=0;
+        }
+    }
+     ///geração das coordenadas das bombas aleatóriamente///
+     do {
+
+           do{
+           px=rand()%L;
+           py=rand()%C;
+           } while(mapa[px][py]==998);/// para não permitir bombas no mesmo lugar///
+
+           mapa[px][py]=998;
+
+           cont++;
+
+        } while (cont<B);///gerar a quantidade de bombas requerida ///
+
+        ///realizar a geração dos números ao redor das bombas para a referência do jogador no mapa///
+        for(unsigned short int matrizL=0;matrizL<L;matrizL++){
+        for(unsigned short int matrizC=0;matrizC<C;matrizC++){
+          if(mapa[matrizL][matrizC]==998){
+            for(int i=-1;i<2;i++){
+                for(int j=-1;j<2;j++){
+                        if (mapa[matrizL+i][matrizC+j]==998){
+                    mapa[matrizL+i][matrizC+j]=mapa[matrizL+i][matrizC+j];
+                    } else if(matrizL+i>L-1 or matrizL+i<0 or matrizC+j>C-1 or matrizC+j<0) {
+                    cout<<"";
+                    } else {
+                      mapa[matrizL+i][matrizC+j]=mapa[matrizL+i][matrizC+j]+1;
+                    }
+
+                }
+            }
+
+
+          }
+        }
+    }
+///início da geração do mapa///
+do{///continua enquanto não terminar o jogo///
+do{///Reimpressão do mapa após o usuário digitar um valor errado///
+do{///Reimpressão do mapa após o usuário digitar um valor errado///
+do{///Reimpressão do mapa após o usuário digitar um valor errado///
+    for (unsigned short int linha=0;linha<L;linha++){
+
+        if(linha==0){
+            cout<<" ";
+            for (unsigned short int conta=0;conta<C;conta++){ ///geração dos números acima do campo para situar as coordenadas para o usuário///
+                cout<<conta;
+            }
+            cout<<"\n";
+            cout<<char(65+linha);///geração das letras ao lado para situar as coordenadas ao usuário///
+        }else {
+            cout<<char(65+linha);
+        }
+        for (unsigned short int coluna=0;coluna<C;coluna++){ ///impressão do campo///
+            if (mapa[linha][coluna]==998) {///impressão das bombas///
+            cout<<" ";
+            }else if(mapa[linha][coluna]>1000){///impressão dos locais já escolhidos pelo usuário que contenham bombas perto///
+             cout<<mapa[linha][coluna]%1000;
+            }else if(linha==fiox and coluna==fioy){///impressão do local escolhido pelo usuário///
+             cout<<mapa[linha][coluna];
+             mapa[linha][coluna]=mapa[linha][coluna]+1000;///procedimento para garantir a impressão dos locais escolhidos pelo usuário ///
+            }else {
+
+				if(mapa[linha][coluna]==5000){///Caso seja 0 permaneçe 0 no lugar revelado///
+				cout<<"0";
+				}else{
+				cout<<" ";
+				}
+			}
+
+        }
+cout<<"\n";
+        }
+
+
+       cout<<"\n\nInforme uma linha: ";///introdução pelo usuário da linha escolhida///
+       cin>>eu;
+       fiox=toupper(eu)-65;///permitir somente letras///
+       if(fiox<0 or fiox>L-1){///animação se o usuário escolher cordenadas fora dos limites///
+        system("cls");
+        cout<<"FBI:Não tem nada ai Agente!Se concentre no desarme da bomba!";
+       Sleep(2000);
+       system("cls");
+       }
+      } while(fiox<0 or fiox>L-1);///repetir se estiver fora dos limites do campo///
+
+
+
+       cout<<"Informe uma coluna: ";///introdução pelo usuário da coluna escolhida///
+       cin>>eu;
+       fioy=toupper(eu)-48;///permitir somente números///
+	   system("cls");///limpagem da tela para melhorar a visualição do usuário///
+       if(fioy<0 or fioy>C-1){///animação se o usuário escolher cordenadas fora dos limites///
+        system("cls");
+        cout<<"FBI:Não tem nada ai Agente!Se concentre no desarme da bomba!";
+       Sleep(2000);
+       system("cls");
+       }
+     } while(fioy<0 or fioy>C-1);///repetir se estiver fora dos limites do campo///
+     if(mapa[fiox][fioy]>1000){///Comando para evitar que o usuário escolha o mesmo local///
+      cout<<"FBI:Não gaste seu tempo tentando cortar os mesmos fios agente!";
+      Sleep(2000);
+      system("cls");
+      cout<<"FBI:Parta para o próximo!";
+      Sleep(2000);
+      system("cls");
+     }
+    } while(mapa[fiox][fioy]>1000);
+     clicont++;
+	 if(mapa[fiox][fioy]==0){mapa[fiox][fioy]=5000;}///revela um lugar vazio e trava ele///
+     if(mapa[fiox][fioy]!=998){///se a posição escolhida não for uma bomba, o jogo ira prosseguir///
+	 cout<<"FBI: Muito bem agente continue assim... corte os fios corretos..."<<endl;
+	 cout<<"Já cortastes "<<clicont<<" fios corretos..."<<endl<<endl;
+     } else { ///se o usuário escolher a posição de uma bomba, o jogo será finalizado///
+     system("cls");///limpagem da tela para a animação do jogo///
+  cout<<"Perdestes... os inimigos venceram este dia..."<<endl<<endl;
+
+  cout<<"                             ________________                      "<<endl;
+  cout<<"                        ____( (  (    )   )  )___                     "<<endl;
+  cout<<"                       (( (  (  )   _    ))  )   ))                   "<<endl;
+  cout<<"                     ((     (   )(    )  )   (   )  )              "<<endl;
+  cout<<"                   (((  ( _(   )   (   _) ) (  () )  )               "<<endl;
+  cout<<"                  ( (  ( (_)   ((    (   )  .((_ ) .  )_             "<<endl;
+  cout<<"                 ( (  )    (      (  )    )   ) . ) (   )             "<<endl;
+  cout<<"                (  (   (  (   ) (  _  ( _) ).  ) . ) ) ( )            "<<endl;
+  cout<<"                ( (  (   ) (  )   (  ))     ) _)(   )  )  )           "<<endl;
+  cout<<"               ( (  ( | ) (    (_  ( ) ( )  )   ) )  )) ( )           "<<endl;
+  cout<<"                (  (   (  (   (_ ( ) ( _    )  ) (  )  )   )           "<<endl;
+  cout<<"               ( (  ( (  (  )     (_  )  ) )  _)   ) _( ( )                "<<endl;
+  cout<<"                ((  (   )(    (     _    )   _) _(_ (  (_ )              "<<endl;
+  cout<<"                 (_((__(_(__(( ( ( |  ) ) ) )_))__))_)___)               "<<endl;
+  cout<<"                 ((__)        ||||||||||||||          (_))               "<<endl;
+  cout<<"                          (   |(( (  )  ) )|   )                 "<<endl;
+  cout<<"                        (    ( ( ( | | ) ) )|   )              "<<endl;
+  cout<<"                         (   |(| | ( )) ) ) )) )           "<<endl;
+  cout<<"                       (     ( ((((_(|)_)))))     )             "<<endl;
+  cout<<"                        (      |||(|(|)||||     )               "<<endl;
+  cout<<"                      (        |(||(||)||||        )             "<<endl;
+  cout<<"                        (     ||||||||)||||     )              "<<endl;
+  cout<<"                      (( ( ((  ||||||||||| ) )  ) _)               "<<endl;
+cout<<"-------------------------------------------------------------------------------             "<<endl;
+    Sleep(3000);
+    system("cls");
+    cout<<"FBI:OH Meu Deus...Você está bem agente?Um Helicóptero de primeiros socorros está a caminho!Fique calmo!"<<endl<<endl;
+    Sleep(3000);
+    system("cls");
+    cout<<"Cortastes "<<clicont-1<<" fios corretos antes da explosão..."<<endl<<endl;
+    Sleep(3000);
+    system("cls");
+    return 0;///comando para finalizar o jogo///
+     }
+
+     } while(clicont!=(L*C)-B);///enquanto não escolher todas as posições corretas o jogo irá continuar,porém se o usuário escolher uma bomba o jogo será finalizado///
+
+
+    system("cls");
+	cout<<"FBI: Parabéns agente!";
+	Sleep(3000);
+    system("cls");
+	cout<<"FBI: Bom trabalho!!\n Desarmastes as bombas.\n";
+	Sleep(3000);
+    system("cls");
+	cout<<"FBI: Agora mandarei seu resgate.\n";
+	Sleep(3000);
+    system("cls");
+	cout<<"FBI: Usastes "<<clicont<<" movimentos para desarmar o dispositivo.\n";
+	Sleep(3000);
+    system("cls");
+	cout<<"FBI: Câmbio agente.";
+	Sleep(3000);
+    system("cls");
+	cout<<"FIM DO JOGO!! Obrigado por jogar!"<<endl<<endl;
+
+cout<<"				   \|/                "<<endl;
+cout<<"              `--+--'              "<<endl;
+cout<<"                /|\                "<<endl;
+cout<<"               ' | '               "<<endl;
+cout<<"                 |                  "<<endl;
+cout<<"                 |                  "<<endl;
+cout<<"             ,--'#`--.             "<<endl;
+cout<<"             |#######|             "<<endl;
+cout<<"          _.-'#######`-._           "<<endl;
+cout<<"       ,-'###############`-.          "<<endl;
+cout<<"     ,'#####################`,             "<<endl;
+cout<<"    /#########################\             "<<endl;
+cout<<"   |###########################|          "<<endl;
+cout<<"  |#############################|          "<<endl;
+cout<<"  |#############################|            "<<endl;
+cout<<"  |#############################|           "<<endl;
+cout<<"  |#############################|             "<<endl;
+cout<<"   |###########################|           "<<endl;
+cout<<"    \#########################/             "<<endl;
+cout<<"     `.#####################,'                  "<<endl;
+cout<<"       `._###############_,'               "<<endl;
+cout<<"          `--..#####..--'            "<<endl;
+
+Sleep(3000);
+system("cls");
+return 0;///finalizando o jogo///
+
+    }
